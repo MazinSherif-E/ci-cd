@@ -1,0 +1,19 @@
+name: Variables
+
+on: push    
+
+jobs:
+  Explore-Github-Actions:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: see payload # this is for debugging purpose
+        run: echo "PAYLOAD:\n${PAYLOAD}\n"
+        env:
+          PAYLOAD: ${{ toJSON(github.event) }}
+      - name: print something from the payload
+        run: echo " $PUSHER pushed this their email is $EMAIL"
+        env:
+          PUSHER: ${{ github.event.pusher.name }}
+          EMAIL: ${{ github.event.pusher.name }}
